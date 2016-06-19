@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">instagram-android-sdk</string>
+    <string name="page_load_error">Error loading page</string>
+
+</resources>

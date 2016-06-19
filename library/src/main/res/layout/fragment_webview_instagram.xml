@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:minHeight="1000dp"
+	android:minWidth="1000dp"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/webview_loading_layout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:minHeight="1000dp"
+		android:gravity="center"
+		android:orientation="vertical"
+		android:visibility="visible">
+
+		<ProgressBar
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"/>
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/webview_error_layout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:minHeight="1000dp"
+		android:gravity="center"
+		android:orientation="vertical"
+		android:padding="12dp"
+		android:visibility="gone">
+
+		<TextView
+			android:id="@+id/socialfeedreader_webview_error"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/webview_normal_layout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:minHeight="1000dp"
+		android:orientation="vertical"
+		android:visibility="gone">
+
+		<WebView
+			android:id="@+id/webview_instagram"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+	</LinearLayout>
+
+</LinearLayout>
