@@ -1,0 +1,3 @@
+include ':InstagramAndroidSdkSample', ':library', ':sample'
+include ':InstagramAndroidSdk'
+project(':InstagramAndroidSdk').projectDir = new File('InstagramAndroidSdk')
