@@ -4,8 +4,7 @@ Instagram-Android-API
 Android wrapper for the Instagram API (Work in progress...)
 
 
-License
-=======
+## License
 
     Copyright 2016 Marc Garcia Guerrero
 
