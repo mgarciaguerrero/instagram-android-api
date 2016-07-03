@@ -144,7 +144,6 @@ public class InstagramLoginWebViewFragment extends DialogFragment {
                 loadingLayout.setVisibility(View.VISIBLE);
                 loadedLayout.setVisibility(View.GONE);
                 errorLayout.setVisibility(View.GONE);
-//                final Intent intent = new Intent();
                 if (url.contains("code")) {
                     String temp[] = url.split("=");
                     final String code = temp[1];
@@ -157,31 +156,29 @@ public class InstagramLoginWebViewFragment extends DialogFragment {
                     call.enqueue(new Callback<AuthResponse>() {
                         @Override
                         public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
-                            if (response != null && response.body() != null) {
-                                InstagramManager.getSession().setAccessToken(response.body().getAccessToken());
-                                if (instagramCallback != null) instagramCallback.onSuccess(response.body());
-                            } else {
-                                //TODO implements when accessToken is null
+                            if (response != null) {
+                                if (response.body() != null &&
+                                    response.isSuccessful()) {
+                                    InstagramManager.getSession().setAccessToken(response.body().getAccessToken());
+                                    if (instagramCallback != null) {
+                                        instagramCallback.onSuccess(response.body());
+                                    }
+                                } else {
+                                    if (instagramCallback != null) instagramCallback.onFailure(
+                                            new Throwable(response.errorBody().toString()));
+                                }
                             }
                             dismiss();
                         }
 
                         @Override
                         public void onFailure(Call<AuthResponse> call, Throwable t) {
-//                            intent.putExtra("error", t.getMessage());
-//                            setResult(Activity.RESULT_OK, intent);
-//                            finish();
-                            //TODO implements onFailure
+                            if (instagramCallback != null) instagramCallback.onFailure(t);
                             dismiss();
                         }
                     });
                 } else if (url.contains("error")) {
                     dismiss();
-//                    String temp[] = url.split("=");
-//                    String error = temp[temp.length - 1];
-//                    intent.putExtra("error", error);
-//                    setResult(Activity.RESULT_OK, intent);
-//                    finish();
                 }
                 return true;
             }
