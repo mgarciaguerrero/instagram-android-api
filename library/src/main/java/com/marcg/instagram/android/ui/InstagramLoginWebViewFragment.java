@@ -34,6 +34,7 @@ import android.widget.TextView;
 import com.marcg.instagram.android.InstagramManager;
 import com.marcg.instagram.android.callback.InstagramCallback;
 import com.marcg.instagram.android.endpoints.responses.AuthResponse;
+import com.marcg.instagram.android.exceptions.InstagramAPIException;
 import com.marcg.instagram.android.instagram_android_sdk.R;
 
 import retrofit2.Call;
@@ -69,14 +70,13 @@ public class InstagramLoginWebViewFragment extends DialogFragment {
             clientID = bundle.getString("instagram.ClientId");
             clientSecret = bundle.getString("instagram.ClientSecret");
             redirectURL = bundle.getString("instagram.RedirectUrl");
-        } catch (PackageManager.NameNotFoundException e) {
-            // TODO: thrown an exception
-            Log.e("", "Failed to load meta-data, NameNotFound: " + e.getMessage());
-        } catch (NullPointerException e) {
-            // TODO: thrown an exception
-            Log.e("", "Failed to load meta-data, NullPointer: " + e.getMessage());
+        } catch (Exception e) {
+            Log.e("", "Failed to load meta-data " + e.getMessage());
+            new InstagramAPIException(e.getMessage());
         }
-        if (clientID != null && clientSecret != null && redirectURL != null) {
+        if (clientID != null && !clientID.isEmpty() &&
+                clientSecret != null && !clientSecret.isEmpty() &&
+                redirectURL != null && !redirectURL.isEmpty()) {
 //            getDialog().setTitle(ResourceManager.getInstance(getActivity()).getString(Res.string.seat_driver_out_instagram_login_title));
             View view = inflater.inflate(R.layout.fragment_webview_instagram, container, false);
             webView = (WebView) view.findViewById(R.id.webview_instagram);
@@ -94,7 +94,7 @@ public class InstagramLoginWebViewFragment extends DialogFragment {
             webView.loadUrl(InstagramManager.getTokenAdapter().getCodeRequest(clientID, redirectURL, stringsPermission));
             return view;
         }else{
-            // TODO: add an exception if items are not added on Manifest
+            new InstagramAPIException("Failed to load meta-data ");
             dismiss();
             return null;
         }
@@ -147,13 +147,11 @@ public class InstagramLoginWebViewFragment extends DialogFragment {
                 if (url.contains("code")) {
                     String temp[] = url.split("=");
                     final String code = temp[1];
-
-                    Call call = InstagramManager.getTokenAdapter().getToken(
+                    // Get token
+                    InstagramManager.getTokenAdapter().getToken(
                             clientID,
                             clientSecret,
-                            redirectURL, code);
-
-                    call.enqueue(new Callback<AuthResponse>() {
+                            redirectURL, code).enqueue(new Callback<AuthResponse>() {
                         @Override
                         public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
                             if (response != null) {
