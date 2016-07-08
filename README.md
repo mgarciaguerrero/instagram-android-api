@@ -28,7 +28,11 @@ You can also do it manually, by downloading the source code, importing the `libr
 
 ## How to use
 
-### 1. Set up your application
+### 1. Register Your Application
+
+To get started, you will need to register an application with Instagram. They will provide you with a client id, and a client secret. They will additionally ask you for a callback URL. This is simply a URL that your browser will redirect back to during the Instagram Auth flow.
+
+### 2. Set up your application
 
 On your application class, use this snippet:
 ```java
@@ -41,7 +45,7 @@ On your application class, use this snippet:
     }
 ```
 
-### 2. Set up your manifest
+### 3. Set up your manifest
 ```xml
     <application>
         ...
@@ -57,19 +61,19 @@ On your application class, use this snippet:
     </application>
 ```
 
-### 3. Library
+### 4. Library
 
 To use this library you just need to use ```InstagramManager```. This library has been builded following The Instagram API Platform.
 
-#### 3.1 Authentication
+#### 4.1 Authentication
 
 The Instagram API requires authentication but it is automatically managed by the library.
 
-#### 3.2 Login
+#### 4.2 Login
 
 [TODO] -- add an example
 
-#### 3.3 Permissons
+#### 4.3 Permissons
 
 * basic - to read a user’s profile info and media
 * public_content - to read any public profile info and media on a user’s behalf
@@ -80,7 +84,7 @@ The Instagram API requires authentication but it is automatically managed by the
 
 [TODO] -- add an example
 
-#### 3.3 Endpoints
+#### 4.4 Endpoints
 
 All endpoints are available in InstagramManager and have been builded following the instagram documentation.
 
