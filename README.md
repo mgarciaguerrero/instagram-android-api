@@ -1,3 +1,8 @@
+# DEPRECATED
+
+Instagram API Platform has been deprecated. Check [Instagram developers] and [Platform Changelog] for further information.
+
+
 instagram-android-api
 ========
 
@@ -121,3 +126,4 @@ Any contribution in order to make this library better will be welcome!
 
    [Jorge Guerrero]: <http://jguerrerope.github.io/>
    [Instagram developers]: <https://www.instagram.com/developer/>
+   [Platform Changelog]: <https://www.instagram.com/developer/changelog/>
